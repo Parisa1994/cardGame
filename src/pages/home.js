@@ -3,7 +3,7 @@ class home extends React.Component {
     state = {  }
     render() { 
         return ( 
-            <div>
+            <div className="text-center">
                 <h1>text</h1>
                 <p>
                     this is test
