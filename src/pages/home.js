@@ -10,25 +10,53 @@ class home extends React.Component {
         isStart: false,
     }
 
+    makeCard = () => {
+        
+        
+    }
+
     playGame = (e) => {
         this.setState(prevState => ({isStart: !prevState.isStart}));
-        this.makeCard();
+        let temp = e.target.innerText;
+        console.log(temp);
+        let myCard = this.drawCard();
+        if(temp === "start"){
+            console.log("click start")
+            this.makeCard();
+        }
     }
 
-    makeCard = () => {
+    drawCard = () => {
 
     }
 
-    highterGame = (e) => {
-        console.log("highter");
-    }
 
-    lowerGame = () => {
-        console.log("lower");
-    }
+    // drawCard = () => {
+    //     if(this.state.deck.length>0){
+    //         let randindex = Math.floor(Math.random()*this.state.deck.length);
+    //         let card = this.state.deck.splice(randindex);
+    //         return card;
+    //     }else{
+    //         this.makedeck();
+    //     }
+    // }
+
+    // makedeck = () => {
+    //     const { rank, cardName, deck } = this.state;
+    //     for(let i=0; i < cardName.length; i++){
+    //         for(let j=0; j< rank.length; j++){
+    //             let card = {};
+    //             card.rank = rank[j];
+    //             card.cardName = cardName[i];
+    //             card.value = (j+1);
+    //             deck.push(card);
+    //         }
+    //     }
+    // }
+
 
     render() {
-        const { isStart } = this.state;
+        const { isStart, rank } = this.state;
         return ( 
             <Container className="text-center">
                 <h2>Score: <div className="score">0</div></h2>
@@ -40,13 +68,21 @@ class home extends React.Component {
                         ' click start'
                     }
                 </div>
-                <div className="gameplay"></div>
-                <Button type="button" className={`${isStart ? 'btn-hidden' : ''} ml-2 `} children={"Start"} onClick={this.playGame} />
+                <div className="gameplay">
+                {
+                    isStart ? 
+                    '{mycard.rank}'
+                    :
+                    ''
+                }
+                
+                </div>
+                <Button type="button" className={`${isStart ? 'btn-hidden' : ''} ml-2 `} children={"start"} onClick={this.playGame} />
                 {
                     isStart && (
                         <React.Fragment>
-                            <Button type="button" className="ml-2"children={"Highter"} onClick={this.highterGame} />
-                            <Button type="button" className="ml-2" children={"Lower"} onClick={this.lowerGame} />
+                            <Button type="button" className="ml-2"children={"Highter"}  />
+                            <Button type="button" className="ml-2" children={"Lower"}  />
                         </React.Fragment>
                     )
                 }
