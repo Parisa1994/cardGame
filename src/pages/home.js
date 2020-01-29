@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container, Button } from 'reactstrap';
-import { is } from '@babel/types';
 class home extends React.Component {
     state = {  
         scoreValue: 0,
@@ -10,15 +9,9 @@ class home extends React.Component {
         isStart: false,
     }
 
-    makeCard = () => {
-        
-        
-    }
-
     playGame = (e) => {
         this.setState(prevState => ({isStart: !prevState.isStart}));
         let temp = e.target.innerText;
-        console.log(temp);
         let myCard = this.drawCard();
         if(temp === "start"){
             console.log("click start")
@@ -27,36 +20,36 @@ class home extends React.Component {
     }
 
     drawCard = () => {
+        const {deck} = this.state;
+        if(deck.length > 0){
+            var card = "";
+            return card;
+        }else{
+            this.makeDeck();
+            return this.drawCard();
+        }
+    }
+
+    makeDeck = () => {
+        const { cardName, rank, deck} = this.state;
+        for(let i=0; i < cardName.length; i++){
+            for(let j=0; j< rank.length; j++){
+                let card = {};
+                card.cardName = cardName[i];
+                card.rank = rank[j];
+                card.value = (j+1);
+                deck.push(card);
+            }
+        }
+        console.log(deck);
+    }
+
+    makeCard = () => {
 
     }
 
-
-    // drawCard = () => {
-    //     if(this.state.deck.length>0){
-    //         let randindex = Math.floor(Math.random()*this.state.deck.length);
-    //         let card = this.state.deck.splice(randindex);
-    //         return card;
-    //     }else{
-    //         this.makedeck();
-    //     }
-    // }
-
-    // makedeck = () => {
-    //     const { rank, cardName, deck } = this.state;
-    //     for(let i=0; i < cardName.length; i++){
-    //         for(let j=0; j< rank.length; j++){
-    //             let card = {};
-    //             card.rank = rank[j];
-    //             card.cardName = cardName[i];
-    //             card.value = (j+1);
-    //             deck.push(card);
-    //         }
-    //     }
-    // }
-
-
     render() {
-        const { isStart, rank } = this.state;
+        const { isStart } = this.state;
         return ( 
             <Container className="text-center">
                 <h2>Score: <div className="score">0</div></h2>
